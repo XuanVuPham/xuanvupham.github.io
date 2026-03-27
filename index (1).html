@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pham Xuan Vu — Backend Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F0F0F;
+    --surface: #161616;
+    --surface2: #1E1E1E;
+    --border: #2A2A2A;
+    --text: #E8E8E4;
+    --text-muted: #7A7A74;
+    --text-dim: #4A4A46;
+    --accent: #C8FF00;
+    --accent-dim: rgba(200,255,0,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .r { opacity: 0; animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .r1 { animation-delay: 0.05s; } .r2 { animation-delay: 0.15s; }
+  .r3 { animation-delay: 0.28s; } .r4 { animation-delay: 0.40s; }
+  .r5 { animation-delay: 0.52s; } .r6 { animation-delay: 0.64s; }
+  .r7 { animation-delay: 0.76s; }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 64px 48px 100px; }
+
+  /* TOP BAR */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 60px; padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  }
+  .badge {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .badge::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 10px var(--accent);
+    animation: pulse 2s ease infinite;
+  }
+  .topbar-loc { font-size: 12px; color: var(--text-muted); }
+
+  /* HERO */
+  .hero { margin-bottom: 64px; }
+  .hero h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(56px, 9vw, 96px); line-height: 0.92;
+    letter-spacing: -0.03em; text-transform: uppercase; color: var(--text);
+  }
+  .hero h1 .green { color: var(--accent); }
+
+  .hero-meta {
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 24px;
+  }
+  .pill {
+    font-size: 11.5px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-muted);
+    border: 1px solid var(--border); padding: 5px 14px; border-radius: 100px;
+  }
+  .contacts {
+    display: flex; gap: 20px; flex-wrap: wrap; align-items: center;
+    font-size: 13px; color: var(--text-muted);
+  }
+  .contacts a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .contacts a:hover { color: var(--accent); }
+  .dot { color: var(--text-dim); }
+
+  /* STATS */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    margin-bottom: 64px;
+  }
+  .stat {
+    background: var(--surface); padding: 22px 16px; text-align: center;
+    transition: background 0.2s;
+  }
+  .stat:hover { background: var(--surface2); }
+  .stat-n {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 30px;
+    color: var(--accent); display: block; line-height: 1; margin-bottom: 6px;
+  }
+  .stat-l {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted);
+  }
+
+  /* SECTION */
+  section { margin-bottom: 60px; }
+  .sh {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  }
+  .sn {
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-weight: 700; color: var(--accent); letter-spacing: 0.12em;
+  }
+  .st {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .sl { flex: 1; height: 1px; background: var(--border); }
+
+  /* SKILLS */
+  .skill-row {
+    display: grid; grid-template-columns: 120px 1fr; gap: 20px;
+    padding: 10px 0; border-bottom: 1px solid var(--border); align-items: start;
+  }
+  .skill-row:last-child { border-bottom: none; }
+  .sk {
+    font-size: 10.5px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-dim); padding-top: 4px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 12.5px; color: var(--text-muted);
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 3px 10px; border-radius: 4px; transition: all 0.2s;
+  }
+  .tag:hover { color: var(--accent); border-color: rgba(200,255,0,0.4); background: var(--accent-dim); }
+  .tag.h { color: var(--accent); border-color: rgba(200,255,0,0.3); background: var(--accent-dim); }
+
+  /* JOB */
+  .job {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px 30px; margin-bottom: 14px;
+    position: relative; overflow: hidden; transition: border-color 0.2s;
+  }
+  .job::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: var(--accent); opacity: 0; transition: opacity 0.2s;
+  }
+  .job:hover { border-color: #3A3A3A; }
+  .job:hover::before { opacity: 1; }
+
+  .jt { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 3px; }
+  .jtitle {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px;
+    letter-spacing: -0.01em; color: var(--text);
+  }
+  .jperiod {
+    font-size: 11px; font-weight: 500; color: var(--text-dim);
+    background: var(--surface2); padding: 4px 10px; border-radius: 4px; flex-shrink: 0;
+  }
+  .jco { font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px; }
+  .jctx {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;
+    padding: 10px 14px; background: var(--surface2); border-radius: 6px;
+    border-left: 2px solid rgba(200,255,0,0.25);
+  }
+  .bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .bullets li {
+    display: flex; gap: 10px;
+    font-size: 13.5px; color: var(--text-muted); line-height: 1.6;
+  }
+  .bullets li::before { content: '›'; color: var(--accent); font-weight: 700; font-size: 15px; line-height: 1.5; flex-shrink: 0; }
+  .hl { color: var(--text); font-weight: 500; }
+
+  .jtags {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .award {
+    font-size: 10.5px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-dim);
+    border: 1px solid rgba(200,255,0,0.2); padding: 3px 10px; border-radius: 4px;
+  }
+
+  /* EDUCATION */
+  .edu {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 30px;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  }
+  .eschool { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 4px; }
+  .efield { font-size: 13px; color: var(--text-muted); }
+  .eyear {
+    font-size: 12px; color: var(--text-dim); font-weight: 500;
+    background: var(--surface2); padding: 6px 14px; border-radius: 4px; flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .fn {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim);
+  }
+  .fe { font-size: 12px; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .fe:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 40px 20px 80px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .hero-meta { flex-direction: column; align-items: flex-start; }
+    .jt { flex-direction: column; }
+    .edu { flex-direction: column; align-items: flex-start; }
+    .topbar { flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+  @media print {
+    body { background: #111; }
+    .r { opacity: 1; animation: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar r r1">
+    <div class="badge">Open to opportunities</div>
+    <div class="topbar-loc">Da Nang, Vietnam · Remote-friendly</div>
+  </div>
+
+  <div class="hero r r2">
+    <h1>Pham<br>Xuan<br><span class="green">Vu</span></h1>
+    <div class="hero-meta">
+      <span class="pill">Backend Engineer</span>
+      <span class="pill">Team Lead</span>
+      <span class="pill">AI Integration</span>
+      <div class="contacts">
+        <a href="/cdn-cgi/l/email-protection#b6cec3d7d8c0c3c6ded7db8f80f6d1dbd7dfda98d5d9db"><span class="__cf_email__" data-cfemail="5b232e3a352d2e2b333a36626d1b3c363a323775383436">[email&#160;protected]</span></a>
+        <span class="dot">·</span>
+        <span>+84 346 523 357</span>
+        <span class="dot">·</span>
+        <a href="https://www.linkedin.com/in/xuan-vu-pham-95b429126/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats r r3">
+    <div class="stat"><span class="stat-n">9+</span><span class="stat-l">Years Rails</span></div>
+    <div class="stat"><span class="stat-n">120+</span><span class="stat-l">Microservices</span></div>
+    <div class="stat"><span class="stat-n">3–4×</span><span class="stat-l">Throughput Gain</span></div>
+    <div class="stat"><span class="stat-n">10</span><span class="stat-l">Engineers Led</span></div>
+  </div>
+
+  <section class="r r4">
+    <div class="sh"><span class="sn">01</span><span class="st">Technical Skills</span><div class="sl"></div></div>
+    <div>
+      <div class="skill-row">
+        <span class="sk">Backend</span>
+        <div class="tags">
+          <span class="tag h">Ruby on Rails</span><span class="tag h">CakePHP</span>
+          <span class="tag">GraphQL + Apollo v4</span><span class="tag">RESTful APIs</span><span class="tag">Microservices</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="sk">Search</span>
+        <div class="tags">
+          <span class="tag h">Elasticsearch</span><span class="tag">Index design</span>
+          <span class="tag">Query optimization</span><span class="tag">Relevance tuning</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="sk">Database</span>
+        <div class="tags">
+          <span class="tag">PostgreSQL</span><span class="tag">MySQL</span>
+          <span class="tag">Query optimization</span><span class="tag">Indexing</span><span class="tag">N+1 resolution</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="sk">Infra</span>
+        <div class="tags">
+          <span class="tag">AWS CloudWatch</span><span class="tag">GCP</span>
+          <span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">Nginx</span><span class="tag">Redis / Sidekiq</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="sk">AI Tooling</span>
+        <div class="tags">
+          <span class="tag h">Claude API</span><span class="tag h">Multi-agent</span>
+          <span class="tag">Devin</span><span class="tag">Gemini</span><span class="tag">Cline</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="sk">Frontend</span>
+        <div class="tags">
+          <span class="tag">Nuxt.js</span><span class="tag">Vue.js</span><span class="tag">Angular</span>
+          <span class="tag">Technical coordination</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="sk">Engineering</span>
+        <div class="tags">
+          <span class="tag">SOLID</span><span class="tag">Design patterns</span><span class="tag">TDD</span>
+          <span class="tag">Code review</span><span class="tag">Agile / Scrum</span><span class="tag">Git</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="r r5">
+    <div class="sh"><span class="sn">02</span><span class="st">Experience</span><div class="sl"></div></div>
+
+    <div class="job">
+      <div class="jt">
+        <div class="jtitle">Senior Backend Engineer & Team Lead</div>
+        <div class="jperiod">Sep 2024 – Present</div>
+      </div>
+      <div class="jco">Peraichi Vietnam · Peraichi Japan</div>
+      <div class="jctx">One of Japan's largest landing page platforms — e-commerce, GMO payment, third-party services. 120+ services: Rails + CakePHP backend, Nuxt.js frontends, GraphQL + Apollo v4 BFF.</div>
+      <ul class="bullets">
+        <li>In the room from day one on requirements — architecture calls, accountable through production. Shaping the spec, not executing it.</li>
+        <li>Core backend contributor across Rails and CakePHP; full-stack when needed, including the GraphQL + Apollo v4 BFF layer.</li>
+        <li>Third-party integrations as standard work — GMO payment, external services, internal API contracts across 120+ microservices.</li>
+        <li><span class="hl">Rebuilt how the team delivers with AI.</span> Claude command/skill/subagent + multi-agent + Devin. 200+ CakePHP async job migrations: 4–6 hrs each → ~1 hr per PR with full test coverage. Team throughput up 3–4×.</li>
+        <li><span class="hl">Mid-project rescue on a company-wide Fincode payment migration</span> — took ownership of integration logic and webhooks, brought the release home. Post-launch: improved revenue, MVT recognition.</li>
+        <li>Production incidents end to end — detect, triage, fix, root cause documentation.</li>
+      </ul>
+      <div class="jtags">
+        <span class="award">Most Valuable Team</span>
+        <span class="award">Nice Try Award ×3</span>
+        <span class="award">2× Internal MVP</span>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="jt">
+        <div class="jtitle">Junior → Senior Developer → Team Lead</div>
+        <div class="jperiod">Sep 2016 – Jul 2024</div>
+      </div>
+      <div class="jco">Sun-asterisk Vietnam</div>
+      <div class="jctx">Vietnamese–Japanese software company. 8 years, one stack — Ruby on Rails across 10+ projects in SaaS, logistics, HR, ERP, and business applications.</div>
+      <ul class="bullets">
+        <li>Grew from writing code to deciding what gets built and how. As team lead: technical direction, code review culture, BE/FE alignment, mentoring.</li>
+        <li><span class="hl">Led a 2-year project replacing a $65K/year third-party HR service</span> with an internal platform for ~1,200 employees — design through delivery.</li>
+        <li>Elasticsearch in production from 2019 — index design, query tuning, relevance work across multiple client systems.</li>
+        <li>Database performance as recurring work. One case: a high-traffic screen dropped from 9–15s → ~3s after targeted profiling and optimization.</li>
+        <li>Full PDCA across every project — design, build, release, monitor. The hardest part of software is rarely the code.</li>
+      </ul>
+      <div class="jtags">
+        <span class="award">3× Project of the Year Nominee</span>
+        <span class="award">Most Valuable Team Lead</span>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="jt">
+        <div class="jtitle">Backend Lead & Project Coordinator</div>
+        <div class="jperiod">2017 – 2019</div>
+      </div>
+      <div class="jco">Freelance · Remote (US Vendor)</div>
+      <ul class="bullets">
+        <li>Led backend for a web + mobile e-commerce platform. Technical estimation, architecture decisions, cross-timezone coordination. Shipped on schedule.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="r r6">
+    <div class="sh"><span class="sn">03</span><span class="st">Education</span><div class="sl"></div></div>
+    <div class="edu">
+      <div>
+        <div class="eschool">Passerelles Numériques Vietnam</div>
+        <div class="efield">Information Technology — Software Engineering</div>
+      </div>
+      <div class="eyear">2014 – 2016</div>
+    </div>
+  </section>
+
+  <footer class="r r7">
+    <div class="
